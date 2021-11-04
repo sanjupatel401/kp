@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <link rel="stylesheet" href="{%static 'bootstrap.css' %}"> -->
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>productwala.com-admin</title>
+    <style>
+        li {
+            list-style-type: none;
+        }
+
+        table {
+            align-items: center;
+
+        }
+
+
+        td {
+            border: 1px solid black;
+            align-items: center;
+            border-top: 0;
+        }
+
+        th {
+            border: 2px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid my-5">
+        <div class="alert alert-primary align-center">
+            <h1 class="text-center">Admin Pannel</h1>
+        </div>
+        <div class="row">
+            <div class="col-md-10 col-sm-11 mx-auto">
+
+                <div class="row">
+                    <div class="col-lg-3 col-md-4 d-md-block d-none">
+                        <div class="card bg-commen card-left">
+                            <div class="card-body">
+                                <nav class="nav flex-column d-block">
+                                    <a data-toggle="tab" class="nav-link active" aria-current="page"
+                                        href="#add_product">Add Product</a>
+                                    <a data-toggle="tab" class="nav-link active" aria-current="page"
+                                        href="#ShowAllProduct">show alll product</a>
+
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- right side div start -->
+                    <div class="col-lg-8 col-md-9">
+                        <div class="card">
+                            <div class="card-header border-bottom mb-3">
+                                <ul class="nav nav-tabs card-header-tebs nav-fill d-md-none">
+                                    <li class="nav-item">
+                                        <a data-toggle="tab" class="nav-link active" aria-current="page"
+                                            href="#add_product">Add Product</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a data-toggle="tab" class="nav-link" href="#ShowAllProduct">show product</a>
+                                    </li>
+                                    <!-- <li class="nav-item">
+                                        <a data-toggle="tab" class="nav-link" href="#Customer">customer</a>
+                                    </li> -->
+
+                                </ul>
+                            </div>
+                            <!-- this is main for show tab data user profile -->
+                            <div class="card-body tab-content border-none">
+
+                                <!-- show tab data -->
+                                <div class="tab-pane active" id="add_product">
+
+
+
+
+
+                                    <form action="addpro/" method="POST" enctype="multipart/form-data">
+                                        {%csrf_token%}
+                                        <div class="form-group">
+                                            <label>Product Name</label>
+                                            <input type="text" name="proname" id="" required>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Product price</label>
+                                            <input type="text" name="proprice" id="" required>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Product details</label>
+                                            <input type="text" name="prodetails" id="" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Product brand</label>
+                                            <input type="text" name="probrand" id="" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Product link</label>
+                                            <input type='text' name='prolink' required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Product image</label>
+                                            <input type="file" name="proimage" id="" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="">category</label>
+                                            <select name="procategory" id="">
+                                                <option value="clouth">clouth</option>
+                                                <option value="electronic">elctronic </option>
+                                                <option value="mobile">mobile</option>
+                                            </select>
+                                        </div>
+
+                                        <button type="submit" class="btn btn-primary">Add Product</button>
+                                    </form>
+                                </div>
+                                <div class="tab-pane " id="ShowAllProduct">
+
+                                    <table class="table table-striped" >
+                                        <thead>
+                                            <th>id</th>
+                                            <th>name</th>
+                                            <th>price</th>
+                                            <th>link</th>
+                                            <th>delete</th>
+
+                                        </thead>
+                                    </table>
+
+
+
+
+                                    {% for i in products %}
+                                    <div class="list d-flex justify-content-between align-   my-3 py-2"
+                                        style="width: 100%;height:4vh;">
+
+
+
+                                       
+                                            <li class="list-item">{{i.id}}</li>
+                                            <li class="list-item">{{i.name}}</li>
+                                            <li class="list-item">{{i.price}}</li>
+                                            <li class="list-item">{{i.link}}</li>
+                                            <li class="list-item"><a href="{%url 'delete_product' i.id%}"
+                                                    class="btn btn-danger">delete</a></li>
+                                        
+                                                    
+                                                </div>
+                                                {%endfor%}
+
+
+
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+        </script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    -->
+</body>
+
+</html>
